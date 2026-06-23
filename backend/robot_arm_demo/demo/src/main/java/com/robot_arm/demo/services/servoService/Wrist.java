@@ -14,7 +14,7 @@ public class Wrist extends ServoMotor {
 
     @Override
     public void setAngle(int angle) {
-        if (angle < 0) {
+        if (angle < 0 || angle >= 60) {
             throw new IllegalArgumentException("angle must be greater than 0");
         }
        super.setAngle(angle);

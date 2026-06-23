@@ -12,7 +12,7 @@ public class Shoulder extends ServoMotor {
 
     @Override
     public void setAngle(int angle) {
-        if(angle < 0){
+        if(angle < 0 || angle > 180){
             throw new IllegalArgumentException("angle out of range");
         }
         super.setAngle(angle);
