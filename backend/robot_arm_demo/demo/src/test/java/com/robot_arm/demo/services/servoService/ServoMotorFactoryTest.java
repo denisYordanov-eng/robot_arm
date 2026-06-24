@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ServoMotorFactoryTest {
 
     public static final ServoMotorName SERVO_NAME_GRIPPER = ServoMotorName.GRIPPER;
-    public static final ServoMotorName SERVO_NAME_WRIST = ServoMotorName.WRIST;
+    public static final ServoMotorName SERVO_NAME_WRIST = ServoMotorName.WRIST_PITCH;
     public static final ServoMotorName SERVO_NAME_SHOULDER = ServoMotorName.SHOULDER;
     public static final ServoMotorName SERVO_NAME_ELBOW = ServoMotorName.ELBOW;
     public static final int CORRECT_ANGLE = 20;
@@ -44,7 +44,7 @@ public class ServoMotorFactoryTest {
     @Test
     public void getServoMotorFactoryWristInstanceCorrectAngle() {
         ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST, CORRECT_ANGLE);
-        assertTrue(motor instanceof Wrist);
+        assertTrue(motor instanceof WristPitch);
     }
 
     @Test(expected=IllegalArgumentException.class)
