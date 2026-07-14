@@ -10,9 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ServoMotorFactoryTest {
 
     public static final ServoMotorName SERVO_NAME_GRIPPER = ServoMotorName.GRIPPER;
-    public static final ServoMotorName SERVO_NAME_WRIST = ServoMotorName.WRIST_PITCH;
-    public static final ServoMotorName SERVO_NAME_SHOULDER = ServoMotorName.SHOULDER;
+    public static final ServoMotorName SERVO_NAME_WRIST_PITCH = ServoMotorName.WRIST_PITCH;
+    public static final ServoMotorName SERVO_NAME_WRIST_ROLL= ServoMotorName.WRIST_ROLL;
     public static final ServoMotorName SERVO_NAME_ELBOW = ServoMotorName.ELBOW;
+    public static final ServoMotorName SERVO_NAME_SHOULDER = ServoMotorName.SHOULDER;
+    public static final ServoMotorName SERVO_NAME_BASE = ServoMotorName.BASE;
     public static final int CORRECT_ANGLE = 20;
     public static final int INCORRECT_ANGLE = 400;
     public static final int NEGATIVE_ANGLE = -5;
@@ -43,18 +45,18 @@ public class ServoMotorFactoryTest {
 
     @Test
     public void getServoMotorFactoryWristInstanceCorrectAngle() {
-        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST, CORRECT_ANGLE);
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST_PITCH, CORRECT_ANGLE);
         assertTrue(motor instanceof WristPitch);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void getServoMotorFactoryWristIncorrectAngle() {
-        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST, INCORRECT_ANGLE);
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST_PITCH, INCORRECT_ANGLE);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void ServoMotorFactoryWristNegativeAngle(){
-        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST, NEGATIVE_ANGLE);
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST_PITCH, NEGATIVE_ANGLE);
     }
 
     @Test
@@ -78,6 +80,11 @@ public class ServoMotorFactoryTest {
         assertTrue(motor instanceof Elbow);
     }
 
+    @Test
+    public void getServoFactoryElbowInstanceCorrectAngle() {
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(ServoMotorName.ELBOW,CORRECT_ANGLE);
+    }
+
     @Test(expected=IllegalArgumentException.class)
     public void getServoMotorFactoryElbowIncorrectAngle() {
         ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_ELBOW, INCORRECT_ANGLE);
@@ -86,5 +93,36 @@ public class ServoMotorFactoryTest {
     @Test(expected = IllegalArgumentException.class)
     public void ServoMotorFactoryElbowNegativeAngle(){
         ServoMotor motor = this.servoMotorFactory.getServoMotor(ServoMotorName.ELBOW, NEGATIVE_ANGLE);
+    }
+
+    @Test
+    public void getServoMotorFactoryBaseInstanceCorrectAngle() {
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_BASE, CORRECT_ANGLE);
+        assertTrue(motor instanceof Base);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void getServoMotorFactoryBaseIncorrectAngle() {
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_BASE, INCORRECT_ANGLE);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ServoMotorFactoryBaseNegativeAngle(){
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_BASE, NEGATIVE_ANGLE);
+    }
+
+    @Test
+    public void getServoMotorFactoryWristRollInstanceCorrectAngle() {
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST_ROLL, CORRECT_ANGLE);
+        assertTrue(motor instanceof WristRoll);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void getServoMotorFactoryWristRollIncorrectAngle() {
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST_ROLL, INCORRECT_ANGLE);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void ServoMotorFactoryWristRollNegativeAngle() {
+        ServoMotor motor = this.servoMotorFactory.getServoMotor(SERVO_NAME_WRIST_ROLL, NEGATIVE_ANGLE);
     }
 }

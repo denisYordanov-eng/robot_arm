@@ -12,5 +12,11 @@ public class Base extends ServoMotor {
         if(angle < 0 || angle >= 180) {
             throw new IllegalArgumentException("angle out of bounds");
         }
+        super.setAngle(angle);
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%s:%s\n",ServoMotorName.BASE, getAngle());
     }
 }

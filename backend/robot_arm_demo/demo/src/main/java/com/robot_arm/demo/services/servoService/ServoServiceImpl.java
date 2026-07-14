@@ -45,4 +45,5 @@ public class ServoServiceImpl implements ServoLogService<ServoLog>,ServoCommand<
     public ServoMotor createCommand(ServoMotorName servoName, int angle) {
        return this.servoFactory.getServoMotor(servoName, angle);
     }
+
 }

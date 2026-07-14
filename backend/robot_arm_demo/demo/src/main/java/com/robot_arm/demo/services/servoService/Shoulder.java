@@ -18,6 +18,9 @@ public class Shoulder extends ServoMotor {
         super.setAngle(angle);
     }
 
-
+@Override
+    public String toString(){
+        return String.format("%s:%s\n",ServoMotorName.WRIST_ROLL, getAngle() );
+}
 
 }
