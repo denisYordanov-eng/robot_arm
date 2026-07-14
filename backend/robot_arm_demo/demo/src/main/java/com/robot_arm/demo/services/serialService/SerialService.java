@@ -1,4 +1,4 @@
-package com.robot_arm.demo.services.bluethoothService;
+package com.robot_arm.demo.services.serialService;
 
 public interface SerialService {
 
