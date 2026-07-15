@@ -1,4 +1,4 @@
-package com.robot_arm.demo.services.servoService;
+package com.robot_arm.demo.services.servoService.servoMotors;
 
 import com.robot_arm.demo.enums.ServoMotorName;
 
@@ -13,10 +13,5 @@ public class Base extends ServoMotor {
             throw new IllegalArgumentException("angle out of bounds");
         }
         super.setAngle(angle);
-    }
-
-    @Override
-    public String toString(){
-        return String.format("%s:%s\n",ServoMotorName.BASE, getAngle());
     }
 }

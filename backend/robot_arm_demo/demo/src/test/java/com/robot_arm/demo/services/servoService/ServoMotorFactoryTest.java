@@ -1,6 +1,7 @@
 package com.robot_arm.demo.services.servoService;
 
 import com.robot_arm.demo.enums.ServoMotorName;
+import com.robot_arm.demo.services.servoService.servoMotors.*;
 import org.junit.Before;
 import org.junit.Test;
 

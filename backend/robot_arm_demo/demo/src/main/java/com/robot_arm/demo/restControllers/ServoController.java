@@ -7,7 +7,7 @@ import com.robot_arm.demo.entity.ServoLog;
 import com.robot_arm.demo.services.serialService.SerialCommand;
 import com.robot_arm.demo.services.servoService.ServoCommand;
 import com.robot_arm.demo.services.servoService.ServoLogService;
-import com.robot_arm.demo.services.servoService.ServoMotor;
+import com.robot_arm.demo.services.servoService.servoMotors.ServoMotor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,15 +52,16 @@ public class ServoController {
         //TODO refactor using DTO
         servoLog.setId(0);
 
-        ServoMotor currentCommand = this.servoCommand.createCommand(
+        ServoMotor currentServoLog = this.servoCommand.createServo(
                 servoLog.getServoMotorName()
-                , servoLog.getAngle()
-        );
+                , servoLog.getAngle());
 
-      String theCommand = currentCommand.toString();
+      String theCommand = currentServoLog.toString();
 
       //send  the command to arduino
         this.serialCommand.sendCommand(theCommand);
+
+        //save  servoLog in db
         return this.servoService.save(servoLog);
     }
 

@@ -1,4 +1,4 @@
-package com.robot_arm.demo.services.servoService;
+package com.robot_arm.demo.services.servoService.servoMotors;
 
 import com.robot_arm.demo.enums.ServoMotorName;
 
@@ -16,8 +16,4 @@ public class Gripper extends ServoMotor {
         }
         super.setAngle(angle);
     }
-@Override
-    public String toString(){
-        return String.format("%s:%s\n",ServoMotorName.GRIPPER, getAngle() );
-}
 }

@@ -1,7 +1,8 @@
 package com.robot_arm.demo.services.servoService;
 
 import com.robot_arm.demo.enums.ServoMotorName;
+import com.robot_arm.demo.services.servoService.servoMotors.ServoMotor;
 
 public interface ServoCommand<T extends ServoMotor>{
-    ServoMotor createCommand(ServoMotorName servoName,int angle);
+    ServoMotor createServo(ServoMotorName servoName, int angle);
 }

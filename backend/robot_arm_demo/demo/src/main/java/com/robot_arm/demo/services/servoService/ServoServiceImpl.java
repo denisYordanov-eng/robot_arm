@@ -3,6 +3,7 @@ package com.robot_arm.demo.services.servoService;
 import com.robot_arm.demo.entity.ServoLog;
 import com.robot_arm.demo.repository.ServoRepository;
 import com.robot_arm.demo.enums.ServoMotorName;
+import com.robot_arm.demo.services.servoService.servoMotors.ServoMotor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class ServoServiceImpl implements ServoLogService<ServoLog>,ServoCommand<
     }
 
     @Override
-    public ServoMotor createCommand(ServoMotorName servoName, int angle) {
+    public ServoMotor createServo(ServoMotorName servoName, int angle) {
        return this.servoFactory.getServoMotor(servoName, angle);
     }
 
