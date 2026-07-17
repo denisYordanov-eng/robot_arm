@@ -72,6 +72,7 @@ Once connected, you can send movement commands to individual joints.
 {
   "ELBOW": 10
 }
+```
 
 ## Future Improvements
 
