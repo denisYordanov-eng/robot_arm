@@ -43,13 +43,10 @@ void loop() {
 
     int separatorIndex = data.indexOf(':');//set the index of ':'
     String motorName = data.substring(0, separatorIndex); //extract the name of the servo motor
-    Serial.println(motorName);
     String angleStr = data.substring(separatorIndex + 1); //extract the angle as a string
 
-
     int degrees = angleStr.toInt();// parse the angle to int
-    Serial.println(degrees);
-
+   
     if (motorName == "ELBOW") {
       if (degreesIsGreater(degrees, posElbow)) {
         goUp(Elbow, posElbow, degrees);
