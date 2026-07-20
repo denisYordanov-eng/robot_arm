@@ -1,28 +1,25 @@
 package com.robot_arm.demo.services.serialService;
 
 import com.fazecast.jSerialComm.SerialPort;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.OperationNotSupportedException;
 
 @Service
-public class SerialServiceImpl implements SerialService,SerialCommand {
+public class SerialServiceImpl implements SerialService, SerialCommand {
     private SerialPort serialPort;
 
 
     public void sendCommand(String command) throws OperationNotSupportedException {
-        if(isConnected()){
-            byte[] bytes = command.getBytes() ;
-            this.serialPort.writeBytes(bytes, bytes.length);
-        }else {
-            throw new OperationNotSupportedException("Not connected");
-        }
+        byte[] bytes = command.getBytes();
+        this.serialPort.writeBytes(bytes, bytes.length);
     }
 
     @Override
     public void connect(String port) {
-        if(isConnected()){
-           this.serialPort.closePort();
+        if (isConnected()) {
+            this.serialPort.closePort();
         }
 
         this.serialPort = SerialPort.getCommPort(port);
@@ -38,7 +35,7 @@ public class SerialServiceImpl implements SerialService,SerialCommand {
 
     @Override
     public void disconnectTheSerial() {
-        if(isConnected()){
+        if (isConnected()) {
             this.serialPort.closePort();
         }
     }
