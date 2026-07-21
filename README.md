@@ -70,7 +70,8 @@ Once connected, you can send movement commands to individual joints.
 **Postman Request Body Example:**
 ```json
 {
-  "ELBOW": 10
+    "servoMotorName":"ELBOW",
+    "angle":10
 }
 ```
 
