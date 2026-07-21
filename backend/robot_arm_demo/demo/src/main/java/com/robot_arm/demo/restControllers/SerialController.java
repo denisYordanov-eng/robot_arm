@@ -2,9 +2,11 @@ package com.robot_arm.demo.restControllers;
 
 import com.robot_arm.demo.services.serialService.SerialService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/serial")
 public class SerialController {
     private SerialService serialService;
 
@@ -13,31 +15,28 @@ public class SerialController {
         this.serialService = serialService;
     }
 
-    @GetMapping("/serialIsConnected")
-    public String isConnected() {
-        if (serialService.isConnected()) {
-            return "This serial is connected";
-        } else {
-            return "This serial is not connected";
-        }
+    @GetMapping("/isConnected")
+    public ResponseEntity<Boolean>Connected() {
+        boolean connected = serialService.isConnected();
+        return  ResponseEntity.ok(connected);
     }
 
-    @PostMapping("/serialConnect")
-    public String connect(@RequestParam("portName") String serialPort) {
+    @PostMapping("/connect")
+    public ResponseEntity<Void> connect(@RequestParam("portName") String serialPort) {
         if (!serialService.isConnected()) {
             this.serialService.connect(serialPort);
-            return "This serial is connected";
+           return ResponseEntity.ok().build();
         } else {
-            throw new RuntimeException("This serial is already connected");
+           return ResponseEntity.badRequest().build();
         }
     }
 
-    @PostMapping("/serialDisconnect")
-    public String disconnect() {
+    @PostMapping("/disconnect")
+    public ResponseEntity<Void> disconnect() {
         if (!this.serialService.isConnected()) {
-            throw new RuntimeException("This serial is already disconnected");
+           return ResponseEntity.badRequest().build();
         }
         this.serialService.disconnectTheSerial();
-        return "This serial is disconnected";
+        return ResponseEntity.ok().build();
     }
 }

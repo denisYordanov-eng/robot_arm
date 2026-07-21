@@ -9,6 +9,8 @@ import com.robot_arm.demo.services.servoService.ServoCommand;
 import com.robot_arm.demo.services.servoService.ServoLogService;
 import com.robot_arm.demo.services.servoService.servoMotors.ServoMotor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.OperationNotSupportedException;
@@ -18,7 +20,7 @@ import java.util.Map;
 import static com.robot_arm.demo.jsonMapperSingleton.JsonMapperSingleton.jsonMapperSingleton;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/servo")
 public class ServoController {
     private ServoLogService<ServoLog> servoService;
     private ServoCommand<ServoMotor> servoCommand;
@@ -32,23 +34,22 @@ public class ServoController {
         this.serialCommand = serialCommand;
     }
 
-    @GetMapping("/servo")
+    @GetMapping
     public List<ServoLog> findAll() {
         return this.servoService.findAll();
     }
 
-    @GetMapping("/servo/{id}")
-    public ServoLog getServoLog(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<ServoLog> getServoLog(@PathVariable int id) {
         ServoLog servoLog = servoService.findById(id);
         if (servoLog == null) {
-            throw new IllegalArgumentException("servo not found");
+            return ResponseEntity.notFound().build();
         }
-
-        return servoLog;
+        return ResponseEntity.ok(servoLog);
     }
 
-    @PostMapping("/servo")
-    public ServoLog createServo(@RequestBody ServoLog servoLog) throws OperationNotSupportedException {
+    @PostMapping
+    public ResponseEntity<ServoLog> createServo(@RequestBody ServoLog servoLog) throws OperationNotSupportedException {
         //TODO refactor using DTO
         servoLog.setId(0);
 
@@ -56,27 +57,32 @@ public class ServoController {
                 servoLog.getServoMotorName()
                 , servoLog.getAngle());
 
+        if(currentServoLog == null){
+            return ResponseEntity.badRequest().build();
+        }
+
       String theCommand = currentServoLog.toString();
 
       //send  the command to arduino
         this.serialCommand.sendCommand(theCommand);
 
         //save  servoLog in db
-        return this.servoService.save(servoLog);
+        this.servoService.save(servoLog);
+        return ResponseEntity.status(HttpStatus.CREATED).body(servoLog);
     }
 
-    @PatchMapping("/servo/{id}")
-    public ServoLog patchServoLog(@PathVariable int id
+    @PatchMapping("/{id}")
+    public ResponseEntity<ServoLog> patchServoLog(@PathVariable int id
             , @RequestBody Map<String, Object> patchPayload) throws JsonMappingException {
 
         ServoLog targetServo = this.servoService.findById(id);
 
         if (targetServo == null) {
-            throw new IllegalArgumentException("ServoLog not found");
+            return ResponseEntity.notFound().build();
         }
 
         if (patchPayload.containsKey("id")) {
-            throw new RuntimeException("ServoLog id not allowed in request body - " + id);
+            return ResponseEntity.badRequest().build();
         }
 
         JsonMapper jsonMapper = jsonMapperSingleton();
@@ -84,23 +90,21 @@ public class ServoController {
 
         ServoLog savedServoLog = this.servoService.save(patchedServoLog);
 
-        return savedServoLog;
+        return ResponseEntity.status(HttpStatus.OK).body(savedServoLog);
     }
 
-    @DeleteMapping("/servo/{id}")
-    public String deleteServoLog(@PathVariable int id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteServoLog(@PathVariable int id) {
         ServoLog servoLog = this.servoService.findById(id);
 
         if (servoLog == null) {
-            throw new RuntimeException("ServoLog not found with id - " + id);
+            return ResponseEntity.notFound().build();
         }
 
         this.servoService.deleteById(id);
 
-        return "ServoLog deleted successfully";
+        return ResponseEntity.noContent().build();
     }
-
-
 }
 
 
