@@ -1,4 +1,4 @@
-# Robot Arm — Spring Boot backend + Arduino
+# Robot Arm - Spring Boot backend + Arduino
 
 A Spring Boot REST API that controls a robotic arm via a serial link to an Arduino and persists real‑time coordinates and movement logs in a relational database. The project demonstrates backend ↔ hardware integration, data persistence, and an end‑to‑end demo workflow.
 
@@ -15,7 +15,7 @@ A Spring Boot REST API that controls a robotic arm via a serial link to an Ardui
 - Notable libraries: spring-boot-starter-webmvc, spring-boot-starter-data-jpa, jSerialComm, MySQL connector
 
 
-## Quickstart — run the backend locally
+## Quickstart - run the backend locally
 
 Prerequisites
 - Java 21 JDK
