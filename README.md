@@ -54,7 +54,7 @@ To interact with the robot arm, you must first establish a connection to the ser
 ### Step 1: Establish Serial Connection
 Before sending any movements, connect the backend to your Arduino's serial port.
 
-*   **Endpoint:** `POST /api/serialConnect?portName=COM3` (Replace `COM3` with your actual port or `COM4`)
+*   **Endpoint:** `POST /api/serial/connect?portName=COM3` (Replace `COM3` with your actual port or `COM4`)
 *   **Request Type:** `POST` (Query Parameter)
 *   **Expected Response:** `This serial is connected`
 
