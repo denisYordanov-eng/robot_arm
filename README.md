@@ -1,4 +1,4 @@
-# Robot Arm — Spring Boot backend + Arduino
+# Robot Arm - Spring Boot backend + Arduino
 
 A Spring Boot REST API that controls a robotic arm via a serial link to an Arduino and persists real‑time coordinates and movement logs in a relational database. The project demonstrates backend ↔ hardware integration, data persistence, and an end‑to‑end demo workflow.
 
@@ -15,7 +15,7 @@ A Spring Boot REST API that controls a robotic arm via a serial link to an Ardui
 - Notable libraries: spring-boot-starter-webmvc, spring-boot-starter-data-jpa, jSerialComm, MySQL connector
 
 
-## Quickstart — run the backend locally
+## Quickstart - run the backend locally
 
 Prerequisites
 - Java 21 JDK
@@ -54,7 +54,7 @@ To interact with the robot arm, you must first establish a connection to the ser
 ### Step 1: Establish Serial Connection
 Before sending any movements, connect the backend to your Arduino's serial port.
 
-*   **Endpoint:** `POST /api/serialConnect?portName=COM3` (Replace `COM3` with your actual port or `COM4`)
+*   **Endpoint:** `POST /api/serial/connect?portName=COM3` (Replace `COM3` with your actual port or `COM4`)
 *   **Request Type:** `POST` (Query Parameter)
 *   **Expected Response:** `This serial is connected`
 
@@ -70,7 +70,8 @@ Once connected, you can send movement commands to individual joints.
 **Postman Request Body Example:**
 ```json
 {
-  "ELBOW": 10
+    "servoMotorName":"ELBOW",
+    "angle":10
 }
 ```
 
