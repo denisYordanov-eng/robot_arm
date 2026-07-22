@@ -36,6 +36,7 @@ public class ServoController {
 
     @GetMapping
     public List<ServoLog> findAll() {
+
         return this.servoService.findAll();
     }
 
