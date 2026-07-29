@@ -19,6 +19,7 @@ public class ServoLog {
     @Column(name = "angle")
     private int angle;
 
+
     public ServoLog() {
     }
 

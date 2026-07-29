@@ -22,9 +22,8 @@ public class ServoMotorFactory {
             case GRIPPER:
                 return new Gripper(ServoMotorName.GRIPPER, angle);
             default:
-                throw new RuntimeException("ServoMotorName not found");
+                return null;
         }
-
     }
 
 }
