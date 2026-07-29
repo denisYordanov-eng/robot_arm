@@ -14,6 +14,8 @@ A Spring Boot REST API that controls a robotic arm via a serial link to an Ardui
 - Framework / runtime: Spring Boot (Maven)
 - Notable libraries: spring-boot-starter-webmvc, spring-boot-starter-data-jpa, jSerialComm, MySQL connector
 
+## Demo Video
+Check out the robot arm in action: [Watch on YouTube](https://www.youtube.com/shorts/xjTwRU0DoLg)
 
 ## Quickstart - run the backend locally
 
