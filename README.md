@@ -79,7 +79,6 @@ Once connected, you can send movement commands to individual joints.
 
 ## Future Improvements
 
-- **DTO Integration:** Refactor request payloads to use DTOs (Data Transfer Objects) for better validation and architecture.
 - **Multiple Joint Control:** Upgrade the API to accept and process multiple joint movements in a single request.
 - **Web Frontend:** Build a simple UI with sliders to control the robot arm in real-time.
 - **Asynchronous Processing:** Make serial communication asynchronous to prevent blocking the main server threads.
